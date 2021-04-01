@@ -1,12 +1,12 @@
 function vect = scalaireA(uhk, Nbpt, Nbtri, Numtri, Refneu, Coorneu)
     tri_adj = triadj (Nbpt, Nbtri, Numtri);
-    vect = zeros(Nbpt, 1)
+    vect = zeros(Nbpt, 1);
     
-    % boucle sur les points pas sur la frontière
+    % boucle sur les points pas sur la frontiÃ¨re
     for a=1:Nbpt
     if (Refneu(a) == 0)
         
-        % boucle sur les triangles adjacents à a
+        % boucle sur les triangles adjacents Ã  a
         for K=1:Nbtri
         if (tri_adj(a, K) == 1)
             
@@ -21,10 +21,10 @@ function vect = scalaireA(uhk, Nbpt, Nbtri, Numtri, Refneu, Coorneu)
                 A = Coorneu(Numtri(K, 2), :) ; B = Coorneu(Numtri(K, 1), :);
             end;
             
-            % calcul de la normale au sedment face à a dans K
+            % calcul de la normale au sedment face Ã  a dans K
             n = [A(2) - B(2),  B(1) - A(1)];
             
-            % redressement pour qu'il soit bien extérieur
+            % redressement pour qu'il soit bien extÃ©rieur
                 if (dot(A-Coorneu(a, :), n) <= 0)
                     n = -n;
                 end;
