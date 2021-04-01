@@ -1,13 +1,19 @@
-function [BB] = iter_B (it, uh0, Nbpt)
+function [BB] = iter_B (alpha, L, it, uh0, Nbpt,Nbtri, Coorneu, Numtri, Refneu, Nbiter)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   Calcul de B^(k-1) itéré Nbiter fois
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Initialisation
-gradu = grad(uh0);
-gradpsi = grad_psi(a);
 BB = zeros(Nbpt, 1); 
-BB
+KK = matrice_rigidite(Nbpt, Nbtri, Coorneu, Numtri, Refneu);
+uhk = uh0;
 
-for i=1:it % Itération sur k 
-    for a=1:Nbpt % Itération sur taille de la matrice
-        
+BB = KK*uhk - (alpha / L^2)* scalaireA();  % Pour k=1
 
-BB = dot(uh0, psi)
+for k=1:Nbiter                             % Iteration sur les k
+   uhk = KK\BB;
+   BB = KK*uhk - (alpha / L^2)* scalaireA();
+end
 
+BB = scdTerme(alpha, L, Numtri, Coorneu, Nbpt, Nbtri) + BB;
+end
