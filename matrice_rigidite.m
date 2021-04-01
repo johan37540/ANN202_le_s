@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % matrice_rigidite.m :
-% calcule de la matrice de rigidité
+% calcule de la matrice de rigiditÃ©
 %
 % SYNOPSIS KK = matrice_rigidite()
 %
 % INPUT - Nbpt : nombre de sommets du maillage
 %       - Nbtri : nombre de triangles du maillage
-%       - Coorneu : coordonnées des sommets (Nbpt*2)
+%       - Coorneu : coordonnÃ©es des sommets (Nbpt*2)
 %       - Numtri : liste des sommets des triangles (Nbtri*3)
-%       - Refneu : référence pour les arêtes à l'extérieur (Nbpt*1)
+%       - Refneu : rÃ©fÃ©rence pour les arÃªtes Ã  l'extÃ©rieur (Nbpt*1)
 %
-% OUTPUT - KK : la mtrice de rigidité
+% OUTPUT - KK : la mtrice de rigiditÃ©
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [KK] = matrice_rigidite(Nbpt, Nbtri, Coorneu, Numtri, Refneu)
@@ -21,10 +21,10 @@ function [KK] = matrice_rigidite(Nbpt, Nbtri, Coorneu, Numtri, Refneu)
     % boucles sur les couples de sommets pas au bord
     for i = 1:Nbpt
     if (Refneu(i) == 0)
-        I = Coorneu(i,:)
+        I = Coorneu(i,:);
         for j = 1:Nbpt
         if (Refneu(j) == 0)
-            J = Coorneu(j,:)
+            J = Coorneu(j,:);
             
             % recherche des deux triangles en commun
             for k=1:Nbtri
@@ -41,7 +41,7 @@ function [KK] = matrice_rigidite(Nbpt, Nbtri, Coorneu, Numtri, Refneu)
                 nI = [J(2)-K(2) , K(1)-J(1)];
                 nJ = [I(2)-K(2) , K(1)-I(1)];
                 
-                % redressement pour qu'ils soient bien extérieurs
+                % redressement pour qu'ils soient bien extÃ©rieurs
                 if (dot(J-I, nI) <= 0)
                     nI = -nI;
                 end;
